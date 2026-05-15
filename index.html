@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Refuerzo - HTML & CSS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4 md:p-8">
+
+    <div class="w-full max-w-lg glass-card rounded-2xl shadow-2xl p-8 transition-all duration-300 hover:shadow-3xl">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Refuerzo Académico</h1>
+            <p class="text-gray-600">Completa tus datos para personalizar tu aprendizaje de HTML y CSS.</p>
+        </div>
+
+        <form id="studentForm" class="space-y-6">
+            <div>
+                <label for="fullName" class="block text-sm font-semibold text-gray-700 mb-1">Nombre Completo</label>
+                <input type="text" id="fullName" name="fullName" required 
+                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                    placeholder="Ej: Juan Pérez">
+            </div>
+
+            <div>
+                <label for="phone" class="block text-sm font-semibold text-gray-700 mb-1">Número de Celular</label>
+                <input type="tel" id="phone" name="phone" required
+                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                    placeholder="Ej: 300 123 4567">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Tema a Profundizar</label>
+                    <div class="flex flex-col space-y-2">
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="topic" value="HTML" class="text-blue-600 focus:ring-blue-500" checked>
+                            <span class="ml-2 text-gray-700">Estructura HTML</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="topic" value="CSS" class="text-blue-600 focus:ring-blue-500">
+                            <span class="ml-2 text-gray-700">Estilos CSS</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="topic" value="Ambos" class="text-blue-600 focus:ring-blue-500">
+                            <span class="ml-2 text-gray-700">Ambos (HTML y CSS)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">¿Ya sabes qué hacer en tu web final?</label>
+                    <select id="finalProject" name="finalProject" 
+                        class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                        <option value="no">Aún no lo tengo claro</option>
+                        <option value="si">¡Sí, ya tengo la idea!</option>
+                        <option value="proceso">Estoy en proceso de definirla</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label for="doubts" class="block text-sm font-semibold text-gray-700 mb-1">Dudas específicas o comentarios</label>
+                <textarea id="doubts" name="doubts" rows="3"
+                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none transition"
+                    placeholder="Cuéntame en qué parte te sientes más bloqueado..."></textarea>
+            </div>
+
+            <button type="submit" 
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transform active:scale-95 transition-all duration-200">
+                Enviar Información
+            </button>
+        </form>
+
+        <div id="successMessage" class="hidden mt-6 p-4 bg-green-100 border-l-4 border-green-500 text-green-700 rounded shadow-sm">
+            <div class="flex items-center">
+                <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="font-bold">¡Registro exitoso!</span>
+            </div>
+            <p class="text-sm mt-1">Tus datos han sido enviados. ¡Nos vemos en el refuerzo!</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('studentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Recolección de datos del formulario
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Tu número de WhatsApp (sin espacios ni símbolos)
+            const myPhone = "573202641496"; // He añadido el código de país de Colombia (57)
+            
+            // Construcción del mensaje legible para WhatsApp
+            const message = `*NUEVO REGISTRO DE REFUERZO*%0A` +
+                            `---------------------------%0A` +
+                            `*Nombre:* ${data.fullName}%0A` +
+                            `*Celular:* ${data.phone}%0A` +
+                            `*Tema:* ${data.topic}%0A` +
+                            `*Proyecto Final:* ${data.finalProject}%0A` +
+                            `*Dudas:* ${data.doubts || 'Ninguna'}`;
+
+            // URL de la API de WhatsApp
+            const whatsappUrl = `https://wa.me/${myPhone}?text=${message}`;
+
+            // Mostrar mensaje de éxito visualmente antes de redirigir
+            this.classList.add('opacity-50', 'pointer-events-none');
+            const successBox = document.getElementById('successMessage');
+            successBox.classList.remove('hidden');
+            successBox.classList.add('animate-pulse');
+
+            // Abrir WhatsApp en una nueva pestaña después de un pequeño retraso
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+                successBox.classList.remove('animate-pulse');
+                successBox.innerHTML = '<span class="font-bold">¡Redirigiendo a WhatsApp...!</span>';
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
